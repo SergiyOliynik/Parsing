@@ -1,0 +1,59 @@
+g = Grab()
+cataloglist1=[]
+startURL='https://m.rozetka.com.ua'
+flag = 0
+g.go(https://m.rozetka.com.ua/nodal/80004/)
+nextURL = g.xpath_list('//div[@class="tab-pane active"]/a/@href')
+#print(cataloglist1)
+for i in range(0, len(nextURL), 1):
+cataloglist1.append(nextURL[i])
+#==================================================
+#--------------------------------------------------
+#==================================================
+cataloglist2=[]
+for j in range(0, len(cataloglist1), 1):
+g.go(cataloglist1[j])
+nextURL = g.xpath_list('//div[@class="tab-pane active"]/a/@href')
+for i in range(0, len(nextURL), 1):
+cataloglist2.append(nextURL[i])
+#==================================================
+#--------------------------------------------------
+#==================================================
+cataloglist3=[]
+for j in range(0, len(cataloglist2), 1):
+g.go(cataloglist2[j])
+nextURL = g.xpath_list('//div[@class="tab-pane active"]/a/@href')
+for i in range(0, len(nextURL), 1):
+cataloglist3.append(nextURL[i])
+#==================================================
+#--------------------------------------------------
+#==================================================
+f = open('cataloglist1_URL.txt', 'w')
+for q in range(0, len(cataloglist1), 1):
+f.write( str(cataloglist1[q]) + '\n' )
+f.close()
+f = open('cataloglist2_URL.txt', 'w')
+for q in range(0, len(cataloglist2), 1):
+f.write( str(cataloglist2[q]) + '\n' )
+f.close()
+f = open('cataloglist3_URL.txt', 'w')
+for q in range(0, len(cataloglist3), 1):
+f.write( str(cataloglist3[q]) + '\n' )
+f.close()
+#==================================================
+#--------------------------------------------------
+#==================================================
+productlist=[]
+for j in range(0, len(cataloglist3), 1):
+print('\n')
+print(cataloglist3[j])
+g.go(cataloglist3[j])
+nextURL = g.xpath_list('//div[@class="tab-pane active"]/div/div/div/a/@href')
+for i in range(0, len(nextURL), 1):
+productlist.append(nextURL[i])
+print(productlist)
+#write to file all url with spalnya product
+f = open('productURL.txt', 'w')
+for q in range(0, len(productlist), 1):
+f.write( str(productlist[q]) + '\n' )
+f.close(
